@@ -1,0 +1,218 @@
+﻿body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f9f8fd;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    color: #333;
+}
+
+.register-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    gap: 48px;
+}
+
+/* Form container */
+.register-container {
+    flex: 1;
+    background: #2e2360;
+    padding: 40px 36px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgb(46 35 96 / 0.65);
+    color: #fff;
+}
+
+    .register-container h2 {
+        font-weight: 700;
+        font-size: 2.4rem;
+        margin-bottom: 28px;
+        color: #fff;
+    }
+
+form.register-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        font-size: 1rem;
+        color: #ddd;
+    }
+
+.form-control {
+    padding: 10px 14px;
+    border: 1.8px solid #a18ce1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: #4c3e9f;
+    color: white;
+}
+
+    .form-control::placeholder {
+        color: #d8d3ffcc;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #c4b7ff;
+        background: #6e5cd9;
+    }
+
+.text-danger {
+    grid-column: span 2;
+    font-size: 0.85rem;
+    color: #ff7373;
+    margin-top: 4px;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+/* Gender Buttons */
+.gender-btn-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.gender-btn {
+    flex: 1;
+    padding: 12px 0;
+    border: 2px solid #a18ce1;
+    background-color: transparent;
+    color: #a18ce1;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    user-select: none;
+}
+
+    .gender-btn:hover {
+        background-color: #a18ce1;
+        color: white;
+    }
+
+    .gender-btn.selected {
+        background-color: #a18ce1;
+        color: white;
+        box-shadow: 0 0 10px rgba(161, 140, 225, 0.5);
+        border-color: #a18ce1;
+    }
+
+/* Submit Button */
+.register-btn {
+    grid-column: span 2;
+    background: #6a54a0;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(106, 84, 160, 0.8);
+}
+
+    .register-btn:hover {
+        background: #5a4490;
+        box-shadow: 0 6px 18px rgba(90, 68, 144, 0.9);
+    }
+
+/* Aside info container */
+.info-container {
+    flex: 1;
+    background: white;
+    padding: 40px 36px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #333;
+}
+
+    .info-container h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #6a54a0;
+    }
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .info-list li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 22px;
+        font-size: 1.1rem;
+    }
+
+        .info-list li svg {
+            width: 28px;
+            height: 28px;
+            fill: #6a54a0;
+            flex-shrink: 0;
+        }
+
+.info-image {
+    margin-top: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgb(0 0 0 / 0.1);
+}
+
+    .info-image img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+/* Responsive */
+@media (max-width: 900px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .register-wrapper {
+        flex-direction: column;
+        margin: 20px auto 60px;
+    }
+
+    form.register-form {
+        grid-template-columns: 1fr !important;
+    }
+
+    .form-group.full-width {
+        grid-column: auto !important;
+    }
+
+    .register-btn {
+        grid-column: auto !important;
+    }
+
+    .info-container {
+        margin-top: 40px;
+    }
+}

@@ -1,0 +1,10 @@
+﻿@model string
+
+<link rel="stylesheet" href="~/css/searchBar.css" />
+
+<form method="get" asp-action="Index" class="search-form">
+    <input type="text" name="search" class="search-input" placeholder="Ara..." value="@Model" />
+    <button class="search-button" type="submit">
+        <img src="~/images/icons/search-icon.png" alt="Search" />
+    </button>
+</form>

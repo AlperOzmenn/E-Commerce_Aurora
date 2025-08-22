@@ -1,0 +1,90 @@
+﻿@model ECommerce.Application.DTOs.SellerDTOs.SellerDTO
+
+@{
+    ViewData["Title"] = "Satıcı Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userDetail.css" />
+}
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">📦 Firma Bilgileri</h2>
+
+        <dl class="detail-list">
+            <dt>Firma Adı</dt>
+            <dd>@Model.CompanyName</dd>
+
+            <dt>İletişim Kişisi</dt>
+            <dd>@Model.ContactName</dd>
+
+            <dt>Unvan</dt>
+            <dd>@Model.ContactTitle</dd>
+
+            <dt>Onay Durumu</dt>
+            <dd>@(Model.Approved ? "Onaylı" : "Onay Bekliyor")</dd>
+
+            <dt>Kayıt Tarihi</dt>
+            <dd>@(Model.Approved ? "Onaylı" : "Onay Bekliyor")</dd>
+
+            <dt>Güncelleme Tarihi</dt>
+            <dd>@(Model.UpdatedDate?.ToString("dd.MM.yyyy") ?? "-")</dd>
+
+            <dt>Silinme Tarihi</dt>
+            <dd>@(Model.DeletedDate?.ToString("dd.MM.yyyy") ?? "-")</dd>
+
+            <dt>Silinmiş Mi?</dt>
+            <dd>@(Model.IsDeleted ? "Evet" : "Hayır")</dd>
+        </dl>
+
+        <h2 class="form-title">👤 Kullanıcı Bilgileri</h2>
+        <dl class="detail-list">
+            <dt>Ad</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Soyad</dt>
+            <dd>@Model.Surname</dd>
+
+            <dt>Email</dt>
+            <dd>@Model.Email</dd>
+        </dl>
+
+
+        @* 
+        <div class="detail-section">
+            <h4>📦 Firma Bilgileri</h4>
+            <p><strong>Firma Adı:</strong> @Model.CompanyName</p>
+            <p><strong>İletişim Kişisi:</strong> @Model.ContactName</p>
+            <p><strong>Unvan:</strong> @Model.ContactTitle</p>
+            <p><strong>Onay Durumu:</strong> @(Model.Approved ? "Onaylı" : "Onay Bekliyor")</p>
+            <p><strong>Kayıt Tarihi:</strong> @Model.CreatedDate.ToString("dd.MM.yyyy")</p>
+            <p><strong>Güncelleme Tarihi:</strong> @(Model.UpdatedDate?.ToString("dd.MM.yyyy") ?? "-")</p>
+            <p><strong>Silinme Tarihi:</strong> @(Model.DeletedDate?.ToString("dd.MM.yyyy") ?? "-")</p>
+            <p><strong>Silinmiş Mi?:</strong> @(Model.IsDeleted ? "Evet" : "Hayır")</p>
+        </div>
+        *@ 
+        @*
+        <div class="detail-section mt-4">
+            <h4>👤 Kullanıcı Bilgileri</h4>
+            <p><strong>Ad:</strong> @Model.Name</p>
+            <p><strong>Soyad:</strong> @Model.Surname</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+        *@
+
+        <div class="detail-actions">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Düzenle</a>
+            <a asp-action="Index" class="btn-back">← Listeye dön</a>
+        </div>
+    </div>
+</div>
+
+@* <style>
+    .detail-section {
+        background: #f7f7f7;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
+</style> *@

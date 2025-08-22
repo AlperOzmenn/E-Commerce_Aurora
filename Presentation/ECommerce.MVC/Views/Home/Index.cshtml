@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ECommerce.Application.DTOs.ProductDTOs.ProductListDTO>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/home.css" />
+}
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form.add-to-basket-form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var formData = form.serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: form.attr("action"),
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                        } else {
+                            alert("Sepete eklenemedi.");
+                        }
+                    },
+                    error: function () {
+                        alert("Bir hata oluştu.");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<div class="container mt-4">
+    <div class="row">
+     
+        <div class="col-md-9">
+            <div class="product-grid">
+                @foreach (var product in Model)
+                {
+                    @Html.Partial("~/Views/Shared/Partials/_ProductCardPartial.cshtml", product)
+                }
+            </div>
+        </div>
+    </div>
+</div>

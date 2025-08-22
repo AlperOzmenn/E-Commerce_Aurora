@@ -1,0 +1,41 @@
+﻿@model ECommerce.Application.DTOs.OrderDTOs.OrderDetailDTO
+
+@{
+    ViewData["Title"] = "Sipariş Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userDetail.css" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Sipariş Detayı</h2>
+
+        <dl class="detail-list">
+            <dt>Sipariş Numarası</dt>
+            <dd>@Model.OrderNumber</dd>
+
+            <dt>Sipariş Tarihi</dt>
+            <dd>@Model.OrderDate.ToString("dd.MM.yyyy HH:mm")</dd>
+
+            <dt>Toplam Tutar</dt>
+            <dd>@Model.TotalAmount ₺</dd>
+
+            <dt>Müşteri Adı</dt>
+            <dd>@Model.CustomerName</dd>
+
+            <dt>Durum</dt>
+            <dd>@Model.Status</dd>
+
+            <dt>Sipariş ID</dt>
+            <dd>@Model.Id</dd>
+        </dl>
+
+        <div class="detail-actions">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Düzenle</a>
+            <a asp-action="Index" class="btn-back">← Listeye dön</a>
+        </div>
+    </div>
+</div>

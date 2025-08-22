@@ -1,0 +1,95 @@
+﻿@model ListViewModel<SellerListDTO>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Onay Beklyen Kullanıcılar";
+    // Satır numarası başlat
+    int rowNumber = ((Model.PaginationInfo.CurrentPage - 1) * Model.PaginationInfo.PageSize) + 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user.css" />
+}
+
+<h2>Satıcı Onayı Bekleyenler</h2>
+
+<!-- Arama Çubuğu (opsiyonel) -->
+@await Html.PartialAsync("~/Views/Shared/Partials/_SearchBar.cshtml", Model.SearchQuery)
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.Items.First().Name)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().Surname)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().Email)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().CompanyName)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().ContactName)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().ContactTitle)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().Approved)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().CreatedDate)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().UpdatedDate)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().DeletedDate)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().IsDeleted)</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var seller in Model.Items)
+            {
+                <tr>
+                    <td>@seller.Name</td>
+                    <td>@seller.Surname</td>
+                    <td>@seller.Email</td>
+                    <td>@seller.CompanyName</td>
+                    <td>@seller.ContactName</td>
+                    <td>@seller.ContactTitle</td>
+                    <td>
+                        @if (seller.Approved)
+                        {
+                            <span class="badge bg-success">Onaylı</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Onay Bekliyor</span>
+                        }
+                    </td>
+                    <td>@seller.CreatedDate.ToString("dd.MM.yyyy")</td>
+                    <td>@seller.UpdatedDate?.ToString("dd.MM.yyyy")</td>
+                    <td>@seller.DeletedDate?.ToString("dd.MM.yyyy")</td>
+                    <td>@(seller.IsDeleted ? "Silinmiş" : "Aktif")</td>
+                    <td>
+
+                        <a asp-area="Admin" asp-controller="Seller" asp-action="Detail" asp-route-id="@seller.Id" class="btn btn-sm btn-primary">Detay</a>
+
+                        <!-- Satıcıyı Onaylama -->
+                        <form asp-area="Admin" asp-controller="Seller" asp-action="ApprovedSeller" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@seller.Id" />
+                            <button type="submit" class="btn btn-sm btn-primary">Onayla</button>
+                        </form>
+
+                        <!-- Satıcıyı Reddetme -->
+                        <form asp-area="Admin" asp-controller="Seller" asp-action="RejectSeller" method="post" style="display:inline" onsubmit="return confirm('Bu satıcıyı reddetmek istediğine emin misin?');">
+                            <input type="hidden" name="id" value="@seller.Id" />
+                            <button type="submit"  class="btn btn-sm btn-primary">Reddet</button>
+                        </form>
+
+                  @*       <!-- Satıcıyı Onaylama -->
+                        <form asp-area="Admin" asp-controller="Seller" asp-action="ApprovedSeller" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@seller.Id" />
+                            <button type="submit" class="btn btn-sm btn-success">Onayla</button>
+                        </form>
+
+                        <!-- Satıcıyı Reddetme -->
+                        <form asp-area="Admin" asp-controller="Seller" asp-action="RejectSeller" method="post" style="display:inline" onsubmit="return confirm('Bu satıcıyı reddetmek istediğine emin misin?');">
+                            <input type="hidden" name="id" value="@seller.Id" />
+                            <button type="submit" class="btn btn-sm btn-warning text-white">Reddet</button> 
+                        </form>
+                        *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@await Html.PartialAsync("~/Views/Shared/Partials/_Pagination.cshtml", Model.PaginationInfo)

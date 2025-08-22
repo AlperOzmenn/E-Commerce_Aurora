@@ -1,0 +1,59 @@
+﻿@model ECommerce.Application.DTOs.ProductDTOs.ProductListDTO
+
+<div class="product-card">
+    <img src="@(!string.IsNullOrEmpty(Model.ImagePath) ? $"/images/productsImages/{Model.ImagePath}" : "/images/productsImages/aurora-tedy.png")"
+         alt="@Model.Name"
+         loading="lazy"
+         class="product-img" />
+
+    <div class="product-body">
+        <div class="badges d-flex justify-content-between mb-2">
+            <span class="badge badge-gradient">@(!string.IsNullOrEmpty(Model.CategoryName) ? Model.CategoryName : "Kategori Yok")</span>
+
+            @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+            {
+                <span class="badge badge-discount">-%@Model.Discount.Value</span>
+            }
+        </div>
+
+        <h5 class="product-title" title="@Model.Name">@Model.Name</h5>
+
+        <div class="product-pricing">
+            @if (Model.Discount.HasValue && Model.Discount.Value > 0)
+            {
+                <p class="old-price">₺@Model.UnitPrice.ToString("N2")</p>
+                <p class="price">₺@Model.FinalPrice.ToString("N2")</p>
+            }
+            else
+            {
+                <p class="price">₺@Model.UnitPrice.ToString("N2")</p>
+            }
+        </div>
+
+        <p class="badge badge-seller">@Model.Brand</p>
+
+        <div class="btn-group mt-3">
+            <a asp-controller="Product"
+               asp-action="Detail"
+               asp-route-id="@Model.Id"
+               class="btn btn-outline-primary">
+                Detay
+            </a>
+
+            @if (Model.Stock > 0)
+            {
+                <form asp-area="Customer" asp-controller="Basket" asp-action="AddToBasket" method="post" class="mb-0 add-to-basket-form">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <input type="hidden" name="name" value="@Model.Name" />
+                    <input type="hidden" name="price" value="@Model.FinalPrice" />
+                    <input type="hidden" name="imageUrl" value="@Model.ImagePath" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn btn-primary btn-mor">
+                        <i class="bi bi-cart-plus"></i> Sepete Ekle
+                    </button>
+                </form>
+
+            }
+        </div>
+    </div>
+</div>

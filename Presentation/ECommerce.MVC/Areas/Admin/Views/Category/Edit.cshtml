@@ -1,0 +1,45 @@
+﻿@model ECommerce.Application.DTOs.CategoryDTOs.CategoryUpdateDTO
+
+@{
+    ViewData["Title"] = "Kategori Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userCreate.css" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Kategori Güncelle</h2>
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Name">Kategori Adı</label>
+                <input asp-for="Name" class="form-control" placeholder="Kategori adını güncelle" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description">Açıklama</label>
+                <input asp-for="Description" class="form-control" placeholder="Açıklamayı güncelle" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Güncelle</button>
+            </div>
+        </form>
+        <div class="back-link">
+            <a asp-action="Index">← Kategori listesine dön</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

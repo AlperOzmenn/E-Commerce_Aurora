@@ -1,0 +1,135 @@
+﻿@model ECommerce.Application.ViewModels.AccountVMs.SellerRegisterVM
+@using ECommerce.Domain.Enums
+
+@{
+    ViewBag.Title = "Satıcı Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/account/sellerRegister.css" />
+}
+
+<div class="register-wrapper">
+
+    <div class="register-container" role="form" aria-labelledby="register-title">
+        <h2 id="register-title">Satıcı Hesabı Oluştur</h2>
+        <form asp-controller="Account" asp-action="SellerRegister" method="post" class="register-form" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group full-width">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group full-width">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group full-width">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Cinsiyet -->
+            <div class="form-group">
+                <label>Cinsiyet</label>
+                <div class="gender-btn-group">
+                    <button type="button" class="gender-btn" data-value="@((int)GenderEnum.Kadın)">Kadın</button>
+                    <button type="button" class="gender-btn" data-value="@((int)GenderEnum.Erkek)">Erkek</button>
+                </div>
+                <input type="hidden" asp-for="Gender" id="genderInput" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CompanyName"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactName"></label>
+                <input asp-for="ContactName" class="form-control" />
+                <span asp-validation-for="ContactName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactTitle"></label>
+                <input asp-for="ContactTitle" class="form-control" />
+                <span asp-validation-for="ContactTitle" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="register-btn">Satıcı Ol</button>
+        </form>
+    </div>
+
+    <aside class="info-container" aria-label="Satıcı Olmanın Avantajları">
+        <h3>Satıcı Olmanın Avantajları</h3>
+        <ul class="info-list">
+            <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 16.172l-3.95-3.95-1.414 1.414L9 19 20.364 7.636l-1.414-1.414z" /></svg>
+                Geniş müşteri ağı ile ürünlerinizi milyonlara ulaştırın.
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 16.172l-3.95-3.95-1.414 1.414L9 19 20.364 7.636l-1.414-1.414z" /></svg>
+                Kolay ve güvenli satış yönetimi araçları.
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 16.172l-3.95-3.95-1.414 1.414L9 19 20.364 7.636l-1.414-1.414z" /></svg>
+                7/24 destek ve danışmanlık hizmeti ile yanınızdayız.
+            </li>
+            <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 16.172l-3.95-3.95-1.414 1.414L9 19 20.364 7.636l-1.414-1.414z" /></svg>
+                Performansınızı artırmak için özel promosyon ve kampanyalar.
+            </li>
+        </ul>
+        <div class="info-image">
+            <img src="~/images/pictures/aurora-seller.png" alt="Satıcı Olmak" />
+        </div>
+    </aside>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const genderButtons = document.querySelectorAll('.gender-btn');
+        const genderInput = document.getElementById('genderInput');
+
+        genderButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                genderButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                genderInput.value = btn.getAttribute('data-value');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentValue = genderInput.value;
+            if (currentValue) {
+                genderButtons.forEach(btn => {
+                    if (btn.getAttribute('data-value') === currentValue) {
+                        btn.classList.add('selected');
+                    }
+                });
+            }
+        });
+    </script>
+}

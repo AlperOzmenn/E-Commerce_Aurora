@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Aurora Seller</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/admin/admin.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body data-theme="aurora">
+    <div class="sidebar">
+        <div class="logo">
+            <img src="~/images/logo/aurora-logo.png" alt="Aurora Logo" />
+        </div>
+   @*      <a asp-controller="Home" asp-action="Index" class="nav-link">Dashboard</a> *@
+        <a asp-controller="Product" asp-action="Index" class="nav-link">Ürünler</a>
+        <a asp-controller="Order" asp-action="Index" class="nav-link">Siparişler</a>
+    @*     <a asp-controller="Report" asp-action="Index" class="nav-link">Raporlar</a>
+        <a asp-controller="Settings" asp-action="Index" class="nav-link">Ayarlar</a> *@
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Ara..." />
+            </div>
+
+            <div class="profile-container">
+                <img id="profileImg"
+                     class="profile-avatar-img"
+                     src="@Url.Content($"~/images/userProfile/{User.Identity.Name}.png")"
+                     onerror="this.onerror=null; this.src='/images/userProfiles/default-profile.png';"
+                     alt="Profil" />
+
+                <div class="dropdown-panel" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <span>Aurora @User.Identity.Name</span>
+                        <a asp-area="" asp-controller="Account" asp-action="Logout">Sign out</a>
+                    </div>
+                    <div class="dropdown-body">
+                        <img src="~/images/userProfiles/default-profile.png" alt="Avatar" class="avatar-img" />
+                        <div class="info">
+                            <strong>@User.Identity.Name</strong>
+                            <small>@User.Identity.Name</small>
+                        </div>
+                    </div>
+                    <div class="dropdown-links">
+                        <a asp-area="" asp-controller="Account" asp-action="Profile">Hesabı görüntüle</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Login">Farklı hesapla giriş</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+    </div>
+
+    <script src="~/js/admin.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

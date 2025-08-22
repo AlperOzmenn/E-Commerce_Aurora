@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ECommerce.Domain.Entities
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Aurora</title>
+
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-left">
+            <a href="/"><img src="~/images/logo/aurora-logo.png"alt="Aurora Logo" /></a>
+        </div>
+
+        <div class="search-container">
+            <input type="text" placeholder="Aradığınız ürün, kategori veya markayı yazınız." />
+            <button>Ara</button>
+        </div>
+
+        <div class="auth-buttons">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var user = await UserManager.GetUserAsync(User);
+                var imagePath = string.IsNullOrEmpty(user.Image)
+                ? Url.Content("~/default-profile.png")
+                : Url.Content($"~/images/userProfiles/{user.Image}");
+
+                <div class="user-info">
+                    <img src="@imagePath" alt="Profil Foto" class="profile-pic" id="profileToggle" onerror="this.onerror=null; this.src='/images/userProfiles/default-profile.png';" />
+                    <div class="dropdown-panel" id="profileDropdown">
+                        <div class="dropdown-header">
+                            <span>Aurora @user.UserRoles</span>
+                            <a asp-area="" asp-controller="Account" asp-action="Logout" class="logout-link">Çıkış Yap</a>
+                        </div>
+                        <div class="dropdown-body">
+                            <img src="@imagePath" alt="Avatar" class="avatar-img" onerror="this.onerror=null; this.src='/images/userProfiles/default-profile.png';" />
+                            <div class="info">
+                                <strong>@user.Email</strong>
+                                <small>@user.Email</small>
+                            </div>
+                        </div>
+                        <div class="dropdown-links">
+                            <a asp-area="" asp-controller="Account" asp-action="Profile">Hesabı Görüntüle</a>
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Farklı Hesapla Giriş</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn">Giriş Yap</a>
+                <a asp-controller="Account" asp-action="Register" class="btn">Kayıt Ol</a>
+            }
+        </div>
+    </header>
+
+    <nav class="category-bar">
+        @await Component.InvokeAsync("CategoryList")
+
+        <div class="right-links">
+            <a asp-area="" asp-controller="Account" asp-action="SellerRegister" class="text-link">Aurora'da Satıcı Ol</a>
+            <a asp-area="" asp-controller="Home" asp-action="About" class="text-link">Hakkımızda</a>
+            <a asp-area="" asp-controller="Report" asp-action="Create" class="text-link">Yardım & Destek</a>
+            <a asp-area="Customer" asp-controller="Basket" asp-action="Index" class="basket-icon" title="Sepetim">
+                <img src="~/images/icons/basket-icon.png" alt="Sepetim" />
+                <span>Sepetim</span>
+            </a>
+        </div>
+    </nav>
+
+
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileToggle?.addEventListener('click', () => {
+            profileDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileDropdown?.contains(e.target) && e.target !== profileToggle) {
+                profileDropdown?.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

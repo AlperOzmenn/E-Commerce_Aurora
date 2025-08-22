@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<ECommerce.Application.DTOs.CategoryDTOs.CategoryDTO>
+
+<div class="all-categories">
+    Tüm Kategoriler
+    <div class="dropdown-menu">
+        @foreach (var category in Model)
+        {
+            <a asp-controller="Category"
+               asp-action="GetProductByCategory"
+               asp-route-id="@category.Id"
+               class="item">
+                @category.Name
+            </a>
+        }
+    </div>
+</div>
+
+
+<div class="category-list">
+    @foreach (var category in Model.Take(4))
+    {
+        <a asp-controller="Category"
+           asp-action="GetProductByCategory"
+           asp-route-id="@category.Id">
+            @category.Name
+        </a>
+    }
+</div>
+

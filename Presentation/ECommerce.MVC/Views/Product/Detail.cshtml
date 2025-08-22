@@ -1,0 +1,180 @@
+﻿
+
+@model ECommerce.Application.ViewModels.ProductDetailVM
+
+@{
+    ViewData["Title"] = "Ürün Detayı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/productDetail.css" />
+
+<div class="product-section">
+    <div class="product-image">
+        <img src="~/images/productsImages/@Model.Product.ImageUrl" alt="@Model.Product.Name" />
+        @*   <div class="text-center mt-3">
+            <button class="btn btn-outline-primary">👕 Farklı Görünüm</button>
+        </div> *@
+    </div>
+    <div class="product-info">
+        <h1>@Model.Product.Name</h1>
+
+        <div class="product-prices">
+            <div class="old-price">@Model.Product.UnitPrice TL</div>
+            <div class="new-price">@Model.Product.FinalPrice TL</div>
+            <div class="discount-badge">%@Model.Product.Discount İndirim</div>
+        </div>
+
+        <p class="product-detail">@Model.Product.Description</p>
+
+@*         <div class="size-buttons">
+            <button class="active">S</button>
+            <button>M</button>
+            <button>L</button>
+        </div>
+ *@
+        <div class="action-buttons">
+            <button asp-area="Customer" asp-controller="Basket" asp-action="Index" class="btn-purple">Hemen Al</button>
+            <button asp-area="Customer" asp-controller="Basket" asp-action="Index" class="btn-purple">Sepete Ekle</button>
+        </div>
+
+        <div class="icon-buttons">
+            <div>📄 <br />Ürün Bilgisi</div>
+            <div>⏱️ <br />Teslimat Süresi</div>
+            <div>🎨 <br />Kişiselleştir</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+ @*    <div class="section-title">Benzer Ürünler</div>
+    <div class="product-list-wrapper"> *@
+        @* Benzer ürünler buraya Model üzerinden dinamik gelebilir *@
+        @*         <partial name="_SimilarProductsPartial" model="Model.SimilarProducts" /> *@
+@*     </div> *@
+</div>
+
+<div class="comments-section">
+    <h4>Yorumlar</h4>
+
+    @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+    {
+        var userName = comment.AppUser?.UserName;
+        if (!string.IsNullOrEmpty(comment.Content) && comment.Content.StartsWith("[Seller]:"))
+        {
+            userName = "Seller";
+        }
+        var content = comment.Content.Replace("[Seller]:", "").Trim();
+
+
+        <div class="comment-badge @(userName == "Seller" ? "seller" : "")">
+
+
+            <strong>@userName</strong>
+            <div class="email">@comment.AppUser.Email</div>
+            @content
+
+
+            @foreach (var reply in comment.Replies)
+            {
+                var isSellerReply = !string.IsNullOrEmpty(reply.Content) && reply.Content.StartsWith("[Seller]:");
+                var replyUserName = isSellerReply ? "Seller" : reply.AppUser?.UserName;
+                var replyContent = reply.Content.Replace("[Seller]:", "").Trim();
+
+                <div class="comment-reply @(isSellerReply ? "seller" : "")">
+                    <strong class="@(isSellerReply ? "seller-name" : "")">
+                        @replyUserName
+                        @if (isSellerReply)
+                        {
+                            <span class="seller-badge">✔ Satıcı</span>
+                        }
+                    </strong>
+                    @replyContent
+                </div>
+            }
+
+
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <form class="reply-form" method="post">
+                    <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                    <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                    <textarea name="Content" class="form-control" required></textarea>
+                    <button type="submit" class="btn btn-sm btn-primary mt-1">Yanıtla</button>
+                </form>
+
+            }
+        </div>
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form id="commentForm" class="comment-form mt-4">
+            <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+            <div class="mb-3">
+                <label for="comment" class="form-label">Yorumunuzu yazın</label>
+                <textarea class="form-control" id="comment" name="Content" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Gönder</button>
+        </form>
+
+
+    }
+    else
+    {
+        <p class="login-prompt mt-3">
+            Yorum yapabilmek için <a href="/Account/Register">kayıt olun</a> ya da <a href="/Account/Login">giriş yapın</a>.
+        </p>
+
+    }
+</div>
+
+<div class="detail-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Product.Id" class="btn-edit">Düzenle</a>
+    <a asp-action="Index" class="btn-back">← Listeye dön</a>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Ana yorum gönderme
+            $('#commentForm').submit(function (e) {
+                e.preventDefault();
+                const formData = $(this).serialize();
+
+                $.post('@Url.Action("AddComment", "Comment", new { area = "Customer" })', formData)
+                    .done(function () {
+                        $('#commentForm textarea').val('');
+                        alert('Yorum gönderildi');
+                        location.reload(); // İstersen otomatik yenileyebilirsin
+                    })
+                    .fail(function () {
+                        alert("Hata oluştu.");
+                    });
+            });
+
+            // Cevap (reply) gönderme
+            $(document).on('submit', '.reply-form', function (e) {
+                e.preventDefault();
+                const form = $(this);
+                const formData = form.serialize();
+
+                $.post('@Url.Action("AddComment", "Comment", new { area = "Customer" })', formData)
+                    .done(function () {
+                        form.find('textarea').val('');
+                        alert('Yanıt gönderildi');
+                        location.reload();
+                    })
+                    .fail(function () {
+                        alert("Yanıt gönderilirken hata oluştu.");
+                    });
+            });
+        });
+    </script>
+}
+
+
+
+

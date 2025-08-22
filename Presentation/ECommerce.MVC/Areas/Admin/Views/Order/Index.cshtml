@@ -1,0 +1,62 @@
+﻿@model ListViewModel<OrderListDTO>
+
+@using ECommerce.Domain.Enums
+@* @using YourNamespace.Extensions // Extension method burada olmalı *@
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Sipariş Yönetimi";
+    int rowNumber = ((Model.PaginationInfo.CurrentPage - 1) * Model.PaginationInfo.PageSize) + 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user.css" />
+}
+
+<div class="content-header">
+    <h2 class="page-title">Sipariş Listesi</h2>
+
+</div>
+
+<!-- Arama Çubuğu -->
+@await Html.PartialAsync("~/Views/Shared/Partials/_SearchBar.cshtml", Model.SearchQuery)
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().OrderNumber)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().OrderDate)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().TotalAmount)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().CustomerName)</th>
+                <th>@Html.DisplayNameFor(m => m.Items.First().Status)</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@item.OrderNumber</td>
+                    <td>@item.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@item.TotalAmount.ToString("C")</td>
+                    <td>@item.CustomerName</td>
+                    <td>
+                        <span class="status-badge @item.Status.ToString().ToLower()">
+                            @* @item.Status.ToDisplayName() *@
+                        </span>
+                    </td>
+                    <td class="action-links">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                        <a asp-action="Detail" asp-route-id="@item.Id">Detay</a> |
+                    </td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/Partials/_Pagination.cshtml", Model.PaginationInfo)

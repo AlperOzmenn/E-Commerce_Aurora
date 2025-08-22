@@ -1,0 +1,44 @@
+﻿.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 400px;
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(179, 136, 255, 0.3);
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-button {
+    background-color: var(--accent);
+    padding: 10px 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #444;
+}
+
+.search-button:hover {
+    background-color: #a06bff;
+
+}
+
+.search-button img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1); /* ikon beyazlaşsın dark temada */
+}

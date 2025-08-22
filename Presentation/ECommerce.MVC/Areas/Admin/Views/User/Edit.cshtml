@@ -1,0 +1,85 @@
+﻿@model ECommerce.Application.DTOs.AppUserDTOs.AppUserUpdateDTO
+
+@{
+    ViewData["Title"] = "Kullanıcı Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userCreate.css" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Kullanıcıyı Güncelle</h2>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Name">İsim</label>
+                <input asp-for="Name" class="form-control" placeholder="İsmini güncelle" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname">Soyisim</label>
+                <input asp-for="Surname" class="form-control" placeholder="Soyismini güncelle" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email">E-posta</label>
+                <input asp-for="Email" class="form-control" placeholder="E-postanı güncelle" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            @* <div class="form-group">
+                <label asp-for="Password">Parola</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Yeni parola (opsiyonel)" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+ *@
+            <div class="form-group">
+                <label for="SelectedRole">Rol</label>
+                <select asp-for="SelectedRole" class="form-control" asp-items="ViewBag.RoleList">
+                    <option value="">Rol seçiniz</option>
+                </select>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            </div>
+
+@* 
+            <div class="form-group">
+                <label asp-for="SelectedRole">Rol</label>
+                <select asp-for="SelectedRole" class="form-control">
+                    <option value="">Rol seçiniz</option>
+                    @foreach (var role in (SelectList)ViewBag.RoleList)
+                    {
+                        <option value="@role.Value" selected="@(Model.SelectedRole == role.Value)">
+                            @role.Text
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            </div> *@
+
+            @* <div class="form-group">
+                <label asp-for="Image">Profil Resmi</label>
+                <input asp-for="Image" type="file" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Güncelle</button>
+            </div>
+        </form>
+
+        <div class="back-link">
+            <a asp-action="Index">← Kullanıcı listesine dön</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

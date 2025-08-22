@@ -1,0 +1,69 @@
+﻿:root {
+    --accent: #b388ff;
+    --card-bg: #2e304f;
+    --text-color: #f0f0f5;
+}
+
+/* Tablo genel görünümü */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Tablo başlık arka planı */
+.custom-table thead tr {
+    background-color: rgba(179, 136, 255, 0.3);
+}
+
+/* Hücreler */
+.custom-table th,
+.custom-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+/* Hover efekti */
+.custom-table tbody tr:hover {
+    background-color: rgba(179, 136, 255, 0.15);
+}
+
+/* Sayfa başlığı */
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+/* İçerik başlık kapsayıcı */
+.content-header {
+    margin-bottom: 15px;
+}
+
+/* Hata mesaj kutusu */
+.alert-danger {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Buton linkleri */
+.btn-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+    color: #a06bff;
+    text-decoration: underline;
+}

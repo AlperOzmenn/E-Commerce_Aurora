@@ -1,0 +1,133 @@
+﻿.detail-list {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px 20px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+    .detail-list dt {
+        font-weight: 600;
+        color: var(--accent);
+        align-self: center;
+    }
+
+    .detail-list dd {
+        margin: 0;
+        padding: 8px 12px;
+        background-color: #1e2038;
+        border-radius: 6px;
+        word-break: break-word;
+    }
+
+.detail-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+}
+
+.detail-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-edit, .btn-back {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+    .btn-edit:hover {
+        background-color: var(--accent);
+        color: #fff;
+    }
+
+    .btn-back:hover {
+        background-color: #444;
+    }
+
+.comments-section {
+    margin-top: 30px;
+    background-color: #181a30;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.comment-badge {
+    background-color: #25274d;
+    border-left: 5px solid var(--accent);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: #fff;
+    position: relative;
+}
+
+    .comment-badge strong {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    .comment-badge .email {
+        font-size: 12px;
+        color: #aaa;
+        margin-bottom: 5px;
+    }
+
+.comment-reply {
+    background-color: #1e2038;
+    border-left: 3px solid #888;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-left: 20px;
+    color: #ccc;
+}
+
+.comment-form textarea,
+.reply-form textarea {
+    background-color: #1e2038;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+}
+
+.comment-form button,
+.reply-form button {
+    margin-top: 8px;
+    background-color: var(--accent);
+    border: none;
+    padding: 8px 16px;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+    .comment-form button:hover,
+    .reply-form button:hover {
+        background-color: #5555aa;
+    }
+
+.login-prompt {
+    color: #999;
+    font-style: italic;
+}
+
+.comment-badge.seller {
+    border-left-color: #f39c12;
+    background-color: #2f2f55;
+}
+
+    .comment-badge.seller strong {
+        color: #f39c12;
+    }

@@ -1,0 +1,91 @@
+﻿.create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.create-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    background-color: #1f213f;
+    color: var(--text-color);
+}
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--accent);
+    }
+
+.text-danger {
+    font-size: 13px;
+    color: #ff7676;
+}
+
+.validation-summary {
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+    .btn-submit:hover {
+        background-color: #9c70ff;
+    }
+
+.back-link {
+    margin-top: 16px;
+    text-align: center;
+}
+
+    .back-link a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }

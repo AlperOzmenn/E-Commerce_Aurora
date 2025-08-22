@@ -1,0 +1,53 @@
+﻿@model ECommerce.Application.DTOs.SellerDTOs.SellerUpdateDTO
+
+@{
+    ViewData["Title"] = "Satıcıyı Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userCreate.css" />
+}
+
+<h1>Edit</h1>
+
+<h4>SellerUpdateDTO</h4>
+<hr />
+<div class="row">
+    <div class="create-container">
+        <div class="create-card">
+            <h2 class="form-title">Satıcıyı Güncelle</h2>
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+                <div class="form-group">
+                    <label asp-for="CompanyName">Şirket Adı</label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="Şirket adını güncelle" />
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactName">İletişim Adı</label>
+                    <input asp-for="ContactName" class="form-control" placeholder="İletişim adını güncelle" />
+                    <span asp-validation-for="ContactName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactTitle">İletişim Başlığı</label>
+                    <input asp-for="ContactTitle" class="form-control" placeholder="İletişim başlığı güncelle" />
+                    <span asp-validation-for="ContactTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Güncelle</button>
+                </div>
+            </form>
+            <div class="back-link">
+                <a asp-action="Index">← Satıcı listesine dön</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

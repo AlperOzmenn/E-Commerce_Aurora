@@ -1,0 +1,57 @@
+﻿@model ECommerce.Application.DTOs.AddressDTOs.AddressCreateDTO
+
+@{
+    ViewData["Title"] = "Yeni Adres Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="/css/address.css" rel="stylesheet" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Yeni Adres Oluştur</h2>
+
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="AddressTitle">Adres Başlığı</label>
+                <input asp-for="AddressTitle" class="form-control" placeholder="Ev, Ofis, Kargo vs." />
+                <span asp-validation-for="AddressTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressText">Adres Detayı</label>
+                <textarea asp-for="AddressText" class="form-control" rows="3" placeholder="Mahalle, Sokak, Bina, Daire..."></textarea>
+                <span asp-validation-for="AddressText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City">Şehir</label>
+                <select asp-for="City" class="form-control">
+                    <option value="">Şehir Seçiniz</option>
+                    <option value="34">İstanbul</option>
+                    <option value="6">Ankara</option>
+                    <option value="35">İzmir</option>
+                    <option value="16">Bursa</option>
+                    <!-- Diğer şehirler buraya eklenebilir -->
+                </select>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Region">Bölge / Mahalle</label>
+                <input asp-for="Region" class="form-control" placeholder="İlçe veya semt girin" />
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-submit">Kaydet</button>
+        </form>
+
+        <div class="back-link">
+            <a asp-action="Index">← Adres Listesine Dön</a>
+        </div>
+    </div>
+</div>

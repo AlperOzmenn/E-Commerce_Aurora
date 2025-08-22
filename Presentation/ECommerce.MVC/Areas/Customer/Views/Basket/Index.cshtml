@@ -1,0 +1,51 @@
+﻿@model ECommerce.Application.DTOs.BasketsDTOs.BasketDTO
+@{
+    ViewData["Title"] = "Sepetim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/basket.css" rel="stylesheet" />
+}
+
+<div class="cart-container">
+    <h2 class="cart-title">🛒 Sepetim</h2>
+
+    @if (Model.Items.Any())
+    {
+        @foreach (var item in Model.Items)
+        {
+            <div class="cart-item">
+                <img src="@(!string.IsNullOrEmpty(item.ImageUrl) ? item.ImageUrl : "/images/default-product2.png")" alt="@item.ProductName">
+                <div class="cart-item-details">
+                    <div class="cart-item-name">@item.ProductName</div>
+                    <div class="cart-item-price">Birim Fiyat: @item.UnitPrice.ToString("C")</div>
+                    <div class="cart-item-price">Toplam: @(item.UnitPrice* item.Quantity).ToString("C")</div>
+                </div>
+                <div class="cart-controls">
+                    <form asp-action="DecreaseQuantity" asp-route-productId="@item.ProductId" method="post">
+                        <button class="quantity-btn">-</button>
+                    </form>
+                    <span class="quantity">@item.Quantity</span>
+                    <form asp-action="IncreaseQuantity" asp-route-productId="@item.ProductId" method="post">
+                        <button class="quantity-btn">+</button>
+                    </form>
+                    <form asp-action="RemoveItem" asp-route-productId="@item.ProductId" method="post">
+                        <button class="remove-btn" title="Ürünü Kaldır">
+                            <img src="/images/icons/trash-icon.png" alt="Sil" />
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <div class="cart-summary">
+            <div class="cart-total">Toplam: @Model.TotalPrice</div>
+            <a asp-area="Customer" asp-controller="Payment" asp-action="Create" class="checkout-btn">Satın Al</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4">Sepetinizde ürün bulunmamaktadır.</div>
+    }
+</div>

@@ -1,0 +1,44 @@
+﻿@model ECommerce.Application.DTOs.AddressDTOs.AddressDTO
+
+@{
+    ViewData["Title"] = "Adres Detayları";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userCreate.css" />
+}
+
+<div class="detail-container">
+    <h2 class="detail-title">Adres Detayları</h2>
+
+    <div class="detail-card">
+        <dl class="detail-list">
+            <dt>Id</dt>
+            <dd>@Model.Id</dd>
+
+            <dt>Adres Başlığı</dt>
+            <dd>@Model.AddressTitle</dd>
+
+            <dt>Adres</dt>
+            <dd>@Model.AddressText</dd>
+
+            <dt>Şehir</dt>
+            <dd>@Model.City</dd>
+
+            <dt>Bölge / Mahalle</dt>
+            <dd>@Model.Region</dd>
+
+            <dt>Oluşturulma Tarihi</dt>
+            <dd>@Model.CreatedDate.ToString("dd.MM.yyyy")</dd>
+
+            <dt>Durum</dt>
+            <dd>@(Model.IsDeleted ? "Silinmiş" : "Aktif")</dd>
+        </dl>
+    </div>
+
+    <div class="detail-actions">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-action">Düzenle</a>
+        <a asp-action="Index" class="btn-action btn-back">← Adres Listesine Dön</a>
+    </div>
+</div>

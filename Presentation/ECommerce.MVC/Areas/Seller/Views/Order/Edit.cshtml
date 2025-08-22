@@ -1,0 +1,39 @@
+﻿@model ECommerce.Application.DTOs.OrderDTOs.OrderUpdateDTO
+
+@{
+    ViewData["Title"] = "Sipariş Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userCreate.css" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Sipariş Güncelle</h2>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Status">Durum</label>
+                <input asp-for="Status" class="form-control" placeholder="Sipariş durumunu gir (örn: Onaylandı, İptal Edildi)" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Güncelle</button>
+            </div>
+        </form>
+
+        <div class="back-link">
+            <a asp-action="Index">← Sipariş listesine dön</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

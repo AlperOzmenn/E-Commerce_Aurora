@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    // Layout = "~/Areas/Seller/Views/Shared/_SellerLayout.cshtml";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+    ViewData["PageTitle"] = "Hoş geldin, Eda 👋";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/sellerIndex.css" />
+}
+<div class="stats">
+    <div class="card">
+        <h3>Toplam Satış</h3>
+        <p>1,246</p>
+    </div>
+    <div class="card">
+        <h3>Bekleyen Sipariş</h3>
+        <p>23</p>
+    </div>
+    <div class="card">
+        <h3>Ürün Stok</h3>
+        <p>187</p>
+    </div>
+    <div class="card">
+        <h3>Geri Bildirim</h3>
+        <p>89</p>
+    </div>
+</div>
+
+<div>
+    <h2 class="section-title">Ürünlerim</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Fiyat</th>
+                <th>Stok</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Bluetooth Kulaklık</td>
+                <td>299₺</td>
+                <td>45</td>
+                <td>Aktif</td>
+                <td>
+                    <button class="btn btn-edit">Düzenle</button>
+                    <button class="btn btn-delete">Sil</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Akıllı Saat</td>
+                <td>599₺</td>
+                <td>32</td>
+                <td>Pasif</td>
+                <td>
+                    <button class="btn btn-edit">Düzenle</button>
+                    <button class="btn btn-delete">Sil</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Gaming Mouse</td>
+                <td>249₺</td>
+                <td>110</td>
+                <td>Aktif</td>
+                <td>
+                    <button class="btn btn-edit">Düzenle</button>
+                    <button class="btn btn-delete">Sil</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="orders-list">
+    <h2 class="section-title">Son Siparişler</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sipariş ID</th>
+                <th>Müşteri</th>
+                <th>Ürün</th>
+                <th>Adet</th>
+                <th>Durum</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#001235</td>
+                <td>Ahmet K.</td>
+                <td>Bluetooth Kulaklık</td>
+                <td>2</td>
+                <td>Hazırlanıyor</td>
+                <td>01 Tem 2025</td>
+            </tr>
+            <tr>
+                <td>#001236</td>
+                <td>Mehmet Y.</td>
+                <td>Gaming Mouse</td>
+                <td>1</td>
+                <td>Kargolandı</td>
+                <td>30 Haz 2025</td>
+            </tr>
+            <tr>
+                <td>#001237</td>
+                <td>Selin T.</td>
+                <td>Akıllı Saat</td>
+                <td>1</td>
+                <td>İptal</td>
+                <td>29 Haz 2025</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

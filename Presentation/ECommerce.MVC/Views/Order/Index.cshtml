@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Ödeme - Aurora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f2f6ff;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .checkout-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 0 18px rgba(158, 123, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #5d5d5d;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .order-summary {
+            background-color: #f9f9ff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .btn-pay {
+            background-color: #9e7bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+            .btn-pay:hover {
+                background-color: #7a5fd8;
+            }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* media (max-width: 768px) {
+                    .order-summary
+
+                {
+                    margin-top: 30px;
+                }
+
+                } */
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h2 class="section-title">Teslimat Bilgileri</h2>
+                <form>
+                    <div class="mb-3">
+                        <label>Ad Soyad</label>
+                        <input type="text" class="form-control" value="Eda Üretir">
+                    </div>
+                    <div class="mb-3">
+                        <label>Adres</label>
+                        <input type="text" class="form-control" placeholder="Açık adresinizi girin">
+                    </div>
+                    <div class="mb-3">
+                        <label>Şehir</label>
+                        <input type="text" class="form-control" placeholder="İstanbul, Ankara...">
+                    </div>
+                    <div class="mb-3">
+                        <label>Telefon</label>
+                        <input type="tel" class="form-control" placeholder="+90 5xx xxx xx xx">
+                    </div>
+
+                    <h2 class="section-title mt-4">Kart Bilgileri</h2>
+                    <div class="mb-3">
+                        <label>Kart Numarası</label>
+                        <input type="text" class="form-control" placeholder="**** **** **** 1234">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Son Kullanma Tarihi</label>
+                            <input type="text" class="form-control" placeholder="MM/YY">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>CVC</label>
+                            <input type="text" class="form-control" placeholder="123">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-pay w-100 mt-3">Ödemeyi Tamamla</button>
+                </form>
+            </div>
+
+            <div class="col-md-5">
+                <div class="order-summary">
+                    <h4 class="section-title">Sipariş Özeti</h4>
+                    <p>Ürün: Aurora Bluetooth Kulaklık</p>
+                    <p>Adet: 1</p>
+                    <p>Birim Fiyat: 799₺</p>
+                    <hr>
+                    <p class="total-price">Toplam: 799₺</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿@model ECommerce.Application.ViewModels.DashboardViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Dashboard";
+}
+
+
+<div class="stats">
+    <div class="card"><h3>Toplam Sipariş</h3><p>@Model.TotalOrders</p></div>
+    <div class="card"><h3>Yeni Ürünler</h3><p>@Model.NewProducts</p></div>
+    <div class="card"><h3>Satıcı Başvuruları</h3><p>@Model.SellerApplications</p></div>
+    <div class="card"><h3>Bugünkü Ziyaretçi</h3><p>@Model.TodayVisitors</p></div>
+</div>

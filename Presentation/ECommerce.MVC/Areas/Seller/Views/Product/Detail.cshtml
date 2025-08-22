@@ -1,0 +1,206 @@
+﻿@model ECommerce.Application.ViewModels.ProductDetailVM
+
+@{
+    ViewData["Title"] = "Satıcı Detayı";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userDetail.css" />
+}
+<h1>Detail</h1>
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Ürün Detayı</h2>
+        <dl class="detail-list">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.ImageUrl)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.ImageUrl)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Stock)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Stock)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.CategoryId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.CategoryId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.CreatedDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.CreatedDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.UpdatedDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.UpdatedDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.DeletedDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.DeletedDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.IsDeleted)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.IsDeleted)
+            </dd>
+        </dl>
+        <div />
+    </div>
+
+    <div class="comments-section">
+        <h4>Yorumlar</h4>
+
+        @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+        {
+            var userName = comment.AppUser?.UserName;
+            if (!string.IsNullOrEmpty(comment.Content) && comment.Content.StartsWith("[Seller]:"))
+            {
+                userName = "Seller";
+            }
+            var content = comment.Content.Replace("[Seller]:", "").Trim();
+
+
+            <div class="comment-badge @(userName == "Seller" ? "seller" : "")">
+
+
+                <strong>@userName</strong>
+                <div class="email">@comment.AppUser.Email</div>
+                @content
+
+
+                @foreach (var reply in comment.Replies)
+                {
+                    var isSellerReply = !string.IsNullOrEmpty(reply.Content) && reply.Content.StartsWith("[Seller]:");
+                    var replyUserName = isSellerReply ? "Seller" : reply.AppUser?.UserName;
+                    var replyContent = reply.Content.Replace("[Seller]:", "").Trim();
+
+                    <div class="comment-reply @(isSellerReply ? "seller" : "")">
+                        <strong class="@(isSellerReply ? "seller-name" : "")">
+                            @replyUserName
+                            @if (isSellerReply)
+                            {
+                                <span class="seller-badge">✔ Satıcı</span>
+                            }
+                        </strong>
+                        @replyContent
+                    </div>
+                }
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form class="reply-form" method="post">
+                        <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                        <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                        <textarea name="Content" class="form-control" required></textarea>
+                        <button type="submit" class="btn btn-sm btn-primary mt-1">Yanıtla</button>
+                    </form>
+
+                }
+            </div>
+        }
+
+        @if (User.Identity.IsAuthenticated)
+        {
+           
+            <form id="commentForm" class="comment-form mt-4">
+                <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Yorumunuzu yazın</label>
+                    <textarea class="form-control" id="comment" name="Content" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Gönder</button>
+            </form>
+
+
+        }
+        else
+        {
+            <p class="login-prompt mt-3">
+                Yorum yapabilmek için <a href="/Account/Register">kayıt olun</a> ya da <a href="/Account/Login">giriş yapın</a>.
+            </p>
+
+        }
+    </div>
+
+    <div class="detail-actions">
+        <a asp-action="Edit" asp-route-id="@Model.Product.Id" class="btn-edit">Düzenle</a>
+        <a asp-action="Index" class="btn-back">← Listeye dön</a>
+    </div>
+@section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // Ana yorum gönderme
+                $('#commentForm').submit(function (e) {
+                    e.preventDefault();
+                    const formData = $(this).serialize();
+
+                    $.post('@Url.Action("AddComment", "Comment", new { area = "Seller" })', formData)
+                        .done(function () {
+                            $('#commentForm textarea').val('');
+                            alert('Yorum gönderildi');
+                            location.reload(); // İstersen otomatik yenileyebilirsin
+                        })
+                        .fail(function () {
+                            alert("Hata oluştu.");
+                        });
+                });
+
+                // Cevap (reply) gönderme
+                $(document).on('submit', '.reply-form', function (e) {
+                    e.preventDefault();
+                    const form = $(this);
+                    const formData = form.serialize();
+
+                    $.post('@Url.Action("AddComment", "Comment", new { area = "Seller" })', formData)
+                        .done(function () {
+                            form.find('textarea').val('');
+                            alert('Yanıt gönderildi');
+                            location.reload();
+                        })
+                        .fail(function () {
+                            alert("Yanıt gönderilirken hata oluştu.");
+                        });
+                });
+            });
+        </script>
+}

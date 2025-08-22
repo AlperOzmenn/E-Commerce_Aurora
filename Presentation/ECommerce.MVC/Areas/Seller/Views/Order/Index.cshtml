@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ECommerce.Application.DTOs.OrderDTOs.OrderListDTO>
+
+@{
+    ViewData["Title"] = "Siparişlerim";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+    int rowNumber = 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/order.css" />
+}
+
+<div class="content-header">
+    <h2 class="page-title">Siparişlerim</h2>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Sipariş No</th>
+                <th>Sipariş Tarihi</th>
+                <th>Tutar</th>
+                <th>Müşteri</th>
+                <th>Durum</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@item.OrderNumber</td>
+                    <td>@item.OrderDate.ToString("dd.MM.yyyy")</td>
+                    <td>@item.TotalAmount.ToString("C0")</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@item.Id" class="btn-link">Detay</a>
+                    </td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</div>

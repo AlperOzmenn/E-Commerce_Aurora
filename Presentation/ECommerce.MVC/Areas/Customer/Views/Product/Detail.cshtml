@@ -1,0 +1,82 @@
+﻿@model ECommerce.Application.ViewModels.ProductDetailVM
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div>
+    <h4>ProductDTO</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.Id)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.Id)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.Name)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.Name)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.Description)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.Description)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.Price)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.Price)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.ImageUrl)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.ImageUrl)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.Stock)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.Stock)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.CategoryId)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.CategoryId)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.CreatedDate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.CreatedDate)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.UpdatedDate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.UpdatedDate)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.DeletedDate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.DeletedDate)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Product.IsDeleted)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Product.IsDeleted)</dd>
+    </dl>
+
+</div>
+<div class="comments-section mt-5">
+    <h4>Yorumlar</h4>
+
+    @foreach (var comment in Model.Comments.Where(c => c.ParentCommentId == null))
+    {
+        <div class="comment border p-2 mb-2">
+            <strong>@comment.AppUser.UserName:</strong> @comment.Content
+
+            @foreach (var reply in comment.Replies)
+            {
+                <div class="reply ms-4 border-start ps-3 mt-2">
+                    <strong>@reply.AppUser.UserName:</strong> @reply.Content
+                </div>
+            }
+
+            <form asp-area="Customer" asp-controller="Comment" asp-action="AddComment" method="post">
+                <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+                <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                <textarea name="Content" required class="form-control"></textarea>
+                <button type="submit" class="btn btn-sm btn-primary mt-1">Yanıtla</button>
+            </form>
+        </div>
+    }
+
+    <!-- Yeni yorum formu (üst yorum) -->
+    <form asp-area="Customer" asp-controller="Comment" asp-action="AddComment" method="post">
+        <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+        <textarea name="Content" required class="form-control" placeholder="Yorumunuzu yazın..."></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Yorum Yap</button>
+    </form>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

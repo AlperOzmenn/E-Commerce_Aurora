@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ECommerce.Application.DTOs.AddressDTOs.AddressListDTO>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Adres Listesi";
+    int rowNumber = 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user.css" />
+}
+
+<div class="content-header">
+    <h2 class="page-title">Adres Listesi</h2>
+
+    <a asp-action="Create" class="btn-primary btn-icon">
+        <img src="~/images/icons/add-icon.png" alt="Add Icon" class="btn-icon-img" />
+        <span>Yeni Adres Ekle</span>
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>@Html.DisplayNameFor(model => model.First().AddressTitle)</th>
+                <th>@Html.DisplayNameFor(model => model.First().AddressText)</th>
+                <th>@Html.DisplayNameFor(model => model.First().City)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Region)</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@item.AddressTitle</td>
+                    <td>@item.AddressText</td>
+                    <td>@item.City</td>
+                    <td>@item.Region</td>
+                    <td class="action-links">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detay</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    </td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</div>

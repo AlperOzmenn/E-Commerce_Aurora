@@ -1,0 +1,53 @@
+﻿@model ECommerce.Application.DTOs.ReportDTOs.ReportCreateDTO
+@{
+    ViewData["Title"] = "Yardım & Destek Talebi Oluştur";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Layout'un neyse onu ayarla
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/report.css" />
+}
+
+<div class="wrapper" role="main" aria-label="Yardım ve Destek Formu">
+
+    <div class="form-container">
+        <h2>Yardım & Destek Talebi Oluştur</h2>
+        <form asp-action="Create" method="post">
+            @* <div class="form-group full-width">
+                <label asp-for="Mail"></label>
+                <input asp-for="Mail" placeholder="example@mail.com" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group full-width">
+                <label asp-for="Subject">Konu</label>
+                <input asp-for="Subject" placeholder="Rapor başlığı" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+
+            <div class="form-group full-width">
+                <label asp-for="Message">Mesaj</label>
+                <textarea asp-for="Message" placeholder="Detayları yazınız..."></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Raporu Oluştur</button>
+        </form>
+    </div>
+
+    <aside class="info-container">
+        <h3>Yardım & Destek Hakkında</h3>
+        <ul class="info-list">
+            <li>Detaylı ve açık açıklama, hızlı çözüm için şart.</li>
+            <li>7/24 destek ekibimizle yanınızdayız.</li>
+            <li>Kategoriyi doğru seçmeniz çözüm sürecini hızlandırır.</li>
+        </ul>
+        <div class="info-image">
+            <img src="~/images/pictures/help-support.png" alt="Yardım ve Destek" />
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

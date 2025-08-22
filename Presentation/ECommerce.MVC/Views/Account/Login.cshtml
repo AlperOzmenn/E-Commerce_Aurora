@@ -1,0 +1,41 @@
+﻿@model ECommerce.MVC.ViewModels.AccountVMs.LoginVM
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/account/login.css" />
+}
+
+<div class="login-container">
+    <h2 class="login-title">Giriş Yap</h2>
+
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group remember-me-group">
+            <input class="form-check-input" asp-for="RememberMe" id="RememberMe" />
+            <label class="form-check-label" for="RememberMe">Beni Hatırla</label>
+        </div>
+
+        <button type="submit" class="btn-login">Giriş Yap</button>
+    </form>
+
+    <div class="login-footer">
+        <a href="#">Şifremi unuttum</a> | <a asp-action="Register">Kayıt Ol</a>
+    </div>
+</div>

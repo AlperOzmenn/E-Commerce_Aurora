@@ -1,0 +1,156 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+  --primary: #6a54a0;
+  --primary-dark: #4e3a78;
+  --background: #fff;
+  --card-bg: #f5f3f7;
+  --text-dark: #2f2d37;
+  --text-muted: #6e6780;
+  --border-radius: 12px;
+  --shadow: 0 6px 12px rgba(110, 103, 128, 0.25);
+  --font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --footer-bg: #fff;
+  --footer-text: #6a54a0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--background);
+  color: var(--text-dark);
+  padding: 60px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  flex-grow: 1;
+}
+
+h1.page-title {
+  font-weight: 800;
+  font-size: 2.8rem;
+  color: var(--primary-dark);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+  transition: box-shadow 0.25s ease;
+  min-height: 320px;
+}
+
+.card:hover {
+  box-shadow: 0 12px 25px rgba(110, 103, 128, 0.45);
+}
+
+.card svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 18px;
+  fill: var(--primary);
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+}
+
+.card p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.wide-card {
+  background: var(--primary);
+  border-radius: var(--border-radius);
+  color: white;
+  box-shadow: 0 12px 30px rgba(106, 84, 160, 0.4);
+  padding: 40px 30px;
+  margin-top: 48px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  cursor: default;
+}
+
+/* Footer stili */
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  width: 100%;
+  padding: 25px 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  margin-top: 40px;
+  letter-spacing: 0.03em;
+  user-select: none;
+  box-shadow: 0 -2px 12px rgba(106, 84, 160, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+footer:hover {
+  background-color: #f0e9ff; /* Açık mor hover efekti */
+}
+
+footer a {
+  color: var(--footer-text);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .wide-card {
+    font-size: 1.1rem;
+    padding: 30px 20px;
+    margin-top: 30px;
+  }
+  h1.page-title {
+    font-size: 2.2rem;
+    margin-bottom: 35px;
+  }
+}

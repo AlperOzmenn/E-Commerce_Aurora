@@ -1,0 +1,44 @@
+﻿@model ECommerce.Application.DTOs.CategoryDTOs.CategoryDetailDTO
+
+@{
+    ViewData["Title"] = "Kategori Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/userDetail.css" />
+}
+
+<div class="create-container">
+    <div class="create-card">
+        <h2 class="form-title">Kategori Detayı</h2>
+
+        <dl class="detail-list">
+            <dt>ID</dt>
+            <dd>@Model.Id</dd>
+
+            <dt>İsim</dt>
+            <dd>@Model.Name</dd>
+
+            <dt>Açıklama</dt>
+            <dd>@Model.Description</dd>
+
+            <dt>Oluşturulma Tarihi</dt>
+            <dd>@Model.CreatedDate.ToString("dd.MM.yyyy HH:mm")</dd>
+
+            <dt>Güncellenme Tarihi</dt>
+            <dd>@(Model.UpdatedDate.HasValue? Model.UpdatedDate.Value.ToString("dd.MM.yyyy HH:mm") : "Güncellenmedi")</dd>
+
+            <dt>Silinme Tarihi</dt>
+            <dd>@(Model.DeletedDate.HasValue? Model.DeletedDate.Value.ToString("dd.MM.yyyy HH:mm") : "Aktif")</dd>
+
+            <dt>Silindi mi?</dt>
+            <dd>@(Model.IsDeleted ? "Evet" : "Hayır")</dd>
+        </dl>
+
+        <div class="detail-actions">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Düzenle</a>
+            <a asp-action="Index" class="btn-back">← Listeye dön</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,234 @@
+﻿@* @model ECommerce.MVC.ViewModels.AccountVMs.ProfileEditVM
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profil Düzenle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="~/css/profile-edit.css" rel="stylesheet" />  <!-- Burada dış CSS dosyasını bağlıyoruz -->
+</head>
+<body>
+
+    <form class="edit-profile-card" method="POST" enctype="multipart/form-data">
+        <div class="avatar-preview">
+            @if (Model.ImagePath != null)
+            {
+                <img src="@Model.ImagePath" alt="Profil Fotoğrafı" class="avatar-img">
+            }
+            else
+            {
+                <img src="/images/default-user.png" alt="Profil Fotoğrafı" class="avatar-img">
+            }
+        </div>
+
+        <div class="form-group">
+            <label for="image">Yeni Profil Fotoğrafı</label>
+            <input type="file" id="image" name="Image" />
+        </div>
+
+        <div class="form-group">
+            <label for="name">Ad</label>
+            <input type="text" id="name" name="Name" value="@Model.Name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Soyad</label>
+            <input type="text" id="surname" name="Surname" value="@Model.Surname" required />
+        </div>
+
+        <div class="form-group">
+            <label for="userName">Kullanıcı Adı</label>
+            <input type="text" id="userName" name="UserName" value="@Model.UserName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Adresi</label>
+            <input type="email" id="email" name="Email" value="@Model.Email" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Kaydet</button>
+    </form>
+
+</body>
+</html>
+ *@
+
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profil Düzenle - Aurora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f1fa;
+            color: #2e2360;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .edit-profile-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 25px rgba(46, 35, 96, 0.15);
+            max-width: 600px;
+            width: 100%;
+            padding: 30px 40px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4e3a78;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d6ccf0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            transition: border 0.3s ease;
+        }
+
+        input[type="file"] {
+            background-color: #f4f1fa;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #a785f9;
+            outline: none;
+        }
+
+        .submit-btn {
+            background: #6a54a0;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 40px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            box-shadow: 0 6px 18px rgba(106, 84, 160, 0.7);
+            transition: background-color 0.3s ease;
+            margin-top: 25px;
+        }
+
+            .submit-btn:hover {
+                background: #4e3a78;
+            }
+
+        .avatar-preview {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .avatar-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(106, 84, 160, 0.7);
+            border: 3px solid #a785f9;
+        }
+
+        /* media (max-width: 520px) {
+                  .edit-profile-card {
+                    padding: 25px 20px;
+                  }
+
+                  .submit-btn {
+                    padding: 12px 30px;
+                    font-size: 15px;
+                  }
+                } */
+    </style>
+</head>
+<body>
+
+    <form class="edit-profile-card">
+        <div class="avatar-preview">
+            <img src="/images/default-user.png" alt="Profil Fotoğrafı" class="avatar-img">
+        </div>
+
+        <div class="form-group">
+            <label for="avatar">Yeni Profil Fotoğrafı</label>
+            <input type="file" id="avatar" name="avatar">
+        </div>
+
+        <div class="form-group">
+            <label for="fullName">Ad Soyad</label>
+            <input type="text" id="fullName" name="fullName">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Adresi</label>
+            <input type="email" id="email" name="email">
+        </div>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px dashed #d6ccf0;">
+
+        <div class="form-group">
+            <label for="addressTitle">Adres Başlığı</label>
+            <input type="text" id="addressTitle" name="addressTitle" placeholder="Ev, Ofis, Kargo vs.">
+        </div>
+
+        <div class="form-group">
+            <label for="addressText">Adres Detayı</label>
+            <textarea id="addressText" name="addressText" rows="3" placeholder="Mahalle, Sokak, Bina, Daire..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="city">Şehir</label>
+            <select id="city" name="city">
+                <option value="">Şehir Seçiniz</option>
+                <option value="34">İstanbul</option>
+                <option value="6">Ankara</option>
+                <option value="35">İzmir</option>
+                <option value="16">Bursa</option>
+                <!-- Diğer şehirler eklenebilir -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="region">Bölge (İsteğe Bağlı)</label>
+            <input type="text" id="region" name="region" maxlength="100" placeholder="Bölge/İlçe adı">
+        </div>
+
+        <button type="submit" class="submit-btn">Kaydet</button>
+    </form>
+
+</body>
+</html>
